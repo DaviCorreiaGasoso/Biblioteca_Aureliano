@@ -5,6 +5,6 @@ def connect():
         host="localhost",
         user="root",
         password="",
-        database="biblioteca"
+        database="biblioteca_aureliano"
     )
     return mydb

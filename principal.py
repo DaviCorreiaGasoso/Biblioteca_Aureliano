@@ -1,4 +1,5 @@
-import biblioteca
+from conectar import connect
+import banco_dados
 
 print ('\nBem-vindo à Biblioteca Aureliano! ')
 print('\nVocê pode fazer as seguintes ações:')
@@ -8,14 +9,16 @@ cont = 0
 
 while cont < 1:
     if acao == 1:
+        mydb = connect()
+
         t = input('Digite o titulo do livro: ')
         a = input('Digite o(a) autor(a) do livro: ')
         ap = input('Digite o ano de publicação do livro: ')
-        l = biblioteca.Livro(t,a,ap)
-        biblioteca.adicionar_livro(l)
-        print('\nO livro foi adicionado no nosso acervo, obrigado pela ajuda!')
-
-
+        d = "Disponivel"
+        banco_dados.inserir(mydb, t, a, ap, d)
+        
+        mydb.close()
+        
     elif acao ==2:
         t = input('Digite o titulo do livro que você quer devolver: ')
         biblioteca.devolver_livro(t)
@@ -28,8 +31,12 @@ while cont < 1:
         print('\nO livro foi emprestado, obrigado por escolher nossa biblioteca!')
 
     elif acao ==4:
-        print('Esse é o nosso acervo ')
-        biblioteca.mostrar_acervo()
+        mydb = connect()
+
+        print('Esse é o nosso acervo: ')
+        banco_dados.mostrar_livros(mydb)
+
+        mydb.close()
 
     elif acao ==5:
         cont = 2
