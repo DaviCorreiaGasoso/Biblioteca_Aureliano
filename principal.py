@@ -3,11 +3,12 @@ import banco_dados
 
 print ('\nBem-vindo à Biblioteca Aureliano! ')
 print('\nVocê pode fazer as seguintes ações:')
-print('\n 1- Adicionar livro \n 2- Delvolver livro \n 3- Emprestar livro \n 4- Mostrar acervo \n 5- Sair do sistema')
-acao = int(input('\nDigite o número da ação da sua escolha: '))
-cont = 0
 
-while cont < 1:
+while True:
+    print('\nVocê pode fazer as seguintes ações:')
+    print('\n 1- Adicionar livro \n 2- Delvolver livro \n 3- Emprestar livro \n 4- Mostrar acervo \n 5- Excluir livro \n 6- Atualizar livro \n 7- Sair do sistema ')
+    acao = int(input('\nDigite o número da ação da sua escolha: '))
+
     if acao == 1:
         mydb = connect()
 
@@ -26,9 +27,12 @@ while cont < 1:
  
         
     elif acao ==3:
+        mydb = connect()
+
         t = input('Digite o titulo do livro que você quer pegar: ')
         banco_dados.emprestar_livros(t)
-        print('\nO livro foi emprestado, obrigado por escolher nossa biblioteca!')
+        
+        mydb.close()
 
     elif acao ==4:
         mydb = connect()
@@ -39,15 +43,15 @@ while cont < 1:
         mydb.close()
 
     elif acao ==5:
-        cont = 2
-        break
+        mydb= connect()
+
+        t=  str(input('Digite o título do livro que você deseja excluir: '))
+        banco_dados.excluir_livros(mydb,t)
+        mydb.close()
 
     else:
         print('Número de escolha inválido, digite novamente')
 
-    print('\nVocê pode fazer as seguintes ações:')
-    print('\n1- Adicionar livro \n 2- Delvolver livro \n 3- Emprestar livro \n 4- Mostrar acervo \n 5- Sair do sistema')
-    acao = int(input('Digite o número da ação da sua escolha: '))
     
 
 print('Você saiu do sistema, até a próxima!!')

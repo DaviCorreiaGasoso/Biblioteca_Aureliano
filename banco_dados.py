@@ -47,6 +47,18 @@ def emprestar_livros(mydb, titulo, status_livro):
        mydb.commit()
        print("Livro emprestado com sucesso!")
        mycursor.close()
+
+def excluir_livros(mydb,titulo):
+       mycursor = mydb.cursor()
+
+       sql= 'DELETE FROM livros (titulo) VALUES (%s)'
+       val= (titulo)
+
+       mycursor.execute(sql,val)
+       mydb.commit()
+       print(mycursor.rowcount, 'O livro foi excluído do nosso acervo!')
+       
+       mycursor.close()
        
 
     
