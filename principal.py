@@ -27,7 +27,7 @@ while cont < 1:
         
     elif acao ==3:
         t = input('Digite o titulo do livro que você quer pegar: ')
-        biblioteca.emprestar_livro(t)
+        banco_dados.emprestar_livros(t)
         print('\nO livro foi emprestado, obrigado por escolher nossa biblioteca!')
 
     elif acao ==4:
