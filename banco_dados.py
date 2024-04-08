@@ -25,10 +25,10 @@ def mostrar_livros(mydb):
         
         mycursor.close()
 
-def emprestar_livros(mydb, titulo, status_livro):
+def emprestar_livros(mydb, titulo):
        mycursor = mydb.cursor()
-       sql = 'SELECT status_livro FROM livros WHERE id = %s'
-       val = (status_livro)
+       sql = 'SELECT status_livro FROM livros WHERE titulo = %s'
+       val = (titulo)
        mycursor.execute(sql, val)
        livro_status = mycursor.fetchone()
 
@@ -41,11 +41,11 @@ def emprestar_livros(mydb, titulo, status_livro):
               mycursor.close()
               return
        else:
-              sql_update = 'UPDATE livros SET status_livro = %s WHERE id = %s'
-              val_update = ('Emprestado', status_livro)
+              sql_update = 'UPDATE livros SET status_livro = %s WHERE  = %s'
+              val_update = ('Emprestado', titulo)
               mycursor.execute(sql_update, val_update)
        mydb.commit()
-       print("Livro emprestado com sucesso!")
+       print(f"O livro {titulo} foi emprestado com sucesso!")
        mycursor.close()
 
 def excluir_livros(mydb,titulo):
@@ -60,7 +60,29 @@ def excluir_livros(mydb,titulo):
        
        mycursor.close()
        
+def devolver_livro(mydb, titulo):
+       mycursor = mydb.cursor()
 
+       sql = 'SELECT status_livro FROM livros WHERE titulo = %s'
+       val = (titulo)
+       mycursor.execute(sql, val)
+       livro_status = mycursor.fetchone()
+
+       if livro_status is None:
+              print("Livro não encontrado.")
+              mycursor.close()
+              return
+       elif livro_status[0] == 'Disponivel':
+              print("O livro já foi devolvido.")
+              mycursor.close()
+              return
+       else:
+              sql_update = 'UPDATE livros SET status_livro = %s WHERE titulo = %s'
+              val_update = ('Disponível', titulo)
+              mycursor.execute(sql_update, val_update)
+       mydb.commit()
+       print(f"O livro {titulo} foi devolvido com sucesso!")
+       mycursor.close()
     
 
 

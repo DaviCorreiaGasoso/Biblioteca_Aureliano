@@ -21,11 +21,13 @@ while True:
         mydb.close()
         
     elif acao ==2:
+        mydb = connect()
         t = input('Digite o titulo do livro que você quer devolver: ')
-        biblioteca.devolver_livro(t)
+        banco_dados.devolver_livro(t)
         print('\nO livro foi devolvido, obrigado por escolher nossa biblioteca!')
  
-        
+        mydb.close()
+
     elif acao ==3:
         mydb = connect()
 
