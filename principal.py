@@ -51,6 +51,11 @@ while True:
         banco_dados.excluir_livros(mydb,t)
         mydb.close()
 
+    elif acao ==6:
+        mydb = connect()
+        
+    elif acao ==7:
+        break
     else:
         print('Número de escolha inválido, digite novamente')
 

@@ -27,6 +27,7 @@ def mostrar_livros(mydb):
 
 def emprestar_livros(mydb, titulo):
        mycursor = mydb.cursor()
+
        sql = 'SELECT status_livro FROM livros WHERE titulo = %s'
        val = (titulo)
        mycursor.execute(sql, val)
@@ -46,6 +47,7 @@ def emprestar_livros(mydb, titulo):
               mycursor.execute(sql_update, val_update)
        mydb.commit()
        print(f"O livro {titulo} foi emprestado com sucesso!")
+
        mycursor.close()
 
 def excluir_livros(mydb,titulo):
@@ -82,9 +84,19 @@ def devolver_livro(mydb, titulo):
               mycursor.execute(sql_update, val_update)
        mydb.commit()
        print(f"O livro {titulo} foi devolvido com sucesso!")
+
        mycursor.close()
     
+def atualizar_livro(mydb, titulo, autor, ano_publicado):
+       mycursor = mydb.cursor()
+
+       sql_update= 'UPDATE livros SET titulo = %s, autor = %s, ano_publicado = %s, where titulo = %s'
+       val_update= (titulo, autor, ano_publicado, titulo)
+       mycursor.execute(sql_update, val_update)
+       mydb.comit()
+       print(mycursor.rowcount, "As informações do livro foram atualizadas com sucesso!")
+
+       mycursor.close()
 
 
-
-
+       
