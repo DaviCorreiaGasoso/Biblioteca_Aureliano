@@ -13,3 +13,15 @@ def inserir(mydb, email, nome, senha, cpf ):
 
         mycursor.close()
 
+
+
+def autenticar(mydb, email, senha):
+        mycursor = mydb.cursor()
+        mycursor.execute('SELECT * FROM user WHERE email = %s AND senha = %s' , (email,senha))
+        resultado = mycursor.fetchall()
+        if autenticar:
+              print('Login encontrado.')
+        else:
+              print ('Login inválido')
+        
+        mycursor.close()
