@@ -1,7 +1,7 @@
 from conectar import connect
 import banco_dados_livro
 import banco_dado_usuario
-
+import banco_dado_emprestimo
 
 def login():
     acesso = False  
